@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Give Me Awesome</title>
+    </head>
+    <body>
+        <div>
+            <ul>
+                {{ range .Data }}
+                    <li style="font-size:18px;margin-bottom: 20px;">
+                        {{ . }}
+                    </li>
+                {{ end }}
+            </ul>
+        </div>
+    </body>
+</html>

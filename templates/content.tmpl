@@ -1,0 +1,79 @@
+{{define "content"}}
+  <div class="row mt-20 content">
+    <div class="col-md-2">
+      <form class="form-horizontal" role="form" action="/v1/query" method="POST">
+        <div class="mb-10">
+          {{ $BookIndex := .Book }}
+          {{ range .BookList }}
+            <div class="custom-control custom-radio">
+              <input type="radio" id="customRadio1" name="book" class="custom-control-input" value={{ .Index }} {{ if eq $BookIndex .Index }} checked {{end}}>
+              <label class="custom-control-label" for="customRadio1">{{ .Name }}</label>
+            </div>
+          {{ end }}
+        </div>
+        <div class="mb-10">
+          <input type="text" class="form-control" name="key" placeholder="多个关键词英文逗号拼接">
+        </div>
+        <div class="mb-10">
+          <button type="submit" class="btn btn-primary">开始查找</button>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div>
+          <ul class="list-group">
+            {{ range .Data }}
+              <li class="list-group-item list-group-item-action">
+                {{ .Content }}
+                <a href={{ .More }}>查看更多</a>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+
+        <nav aria-label="Page navigation">
+          <ul class="pagination example-page">
+            <li class="page-item">
+              <a class="page-link" href={{.Pre}}>上一页</a>
+            </li>
+
+            <li class="page-item">
+              <a class="page-link" href={{.Next}}>下一页</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="col-md-6">
+
+        {{ range .MoreData }}
+          <div class="card mb-10">
+            <div class="card-body">
+              {{ . }}
+            </div>
+          </div>
+
+        {{ end }}
+      </div>
+    </div>
+    <style>
+      .content {
+        padding: 15px;
+      }
+      .example-page {
+        display: flex;
+        margin-top: 20px;
+        justify-content: space-between;
+      }
+      .list-group-item span {
+        color: #fff!important;
+        background-color: #007bff!important;
+      }
+      .mt-20 {
+        margin-top: 20px;
+      }
+      .mb-10 {
+        margin-bottom: 10px;
+      }
+    </style>
+  {{end}}
